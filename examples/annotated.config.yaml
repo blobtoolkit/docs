@@ -1,0 +1,74 @@
+assembly: # REQUIRED: optional keys in this section can be used to search for datasets
+  accession: GCA_003833335.1 # REQUIRED: use GCA accession or "draft"
+  alias: Pldbra_eH_r1 # optional
+  bioproject: PRJNA422793 # optional
+  biosample: SAMN08196759 # optional
+  file: /blobtoolkit/data/GCA_003833335.1/assembly/GCA_003833335.1.fasta.gz # required: use path relative to container
+  level: scaffold # recommended: appears on dataset badge
+  prefix: POCA01 # REQUIRED: will be used as dataset and file prefix, must only contain alphanumeric characters
+  scaffold-count: 136 # optional?
+  span: 24559636 # required only if using max read coverage to filter read files
+  url: ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/833/335/GCA_003833335.1_Pldbra_eH_r1/GCA_003833335.1_Pldbra_eH_r1_genomic.fna.gz # optional
+busco: # REQUIRED
+  basal_lineages: # REQUIRED: list of lineages for busco_genes taxrule. Must be a subset of lineages defined below
+    - eukaryota_odb10
+    - bacteria_odb10
+    - archaea_odb10
+  download_dir: /volumes/databasenfs/busco_2021_06 # REQUIRED: must be a complete busco data directory to allow busco offline mode
+  lineages: # REQUIRED: list of lineages to run busco for. First lineage will; be used for busco_regions taxrule. Must include basal_lineages
+    - eukaryota_odb10
+    - bacteria_odb10
+    - archaea_odb10
+fields: # optional: additional tsv files to load into the BlobDir
+  categories: # optional: tsv file containing category data. Column headers will be used as field names
+    file: /blobtoolkit/data/GCA_003833335.1/assembly/GCA_003833335.1.categories.tsv
+  synonyms: # optional: tsv file containing synonyms. Not currently accessed by viewer
+    file: /blobtoolkit/data/GCA_003833335.1/assembly/GCA_003833335.1.synonyms.tsv
+    prefix: insdc
+reads: # REQUIRED: at least one paired or single read file must be defined to generate a blob plot
+  paired:
+    - file: /blobtoolkit/data/SRR6395506/SRR6395506_1.fastq.gz;/blobtoolkit/data/SRR6395506_2.fastq.gz # REQUIRED: file path relative to container. For paired reads 2 file paths must be separated by ";"
+      platform: ILLUMINA # REQUIRED:
+      prefix: SRR6395506 # REQUIRED:
+      url: ftp.sra.ebi.ac.uk/vol1/fastq/SRR639/006/SRR6395506/SRR6395506_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR639/006/SRR6395506/SRR6395506_2.fastq.gz # optional
+  single: []
+revision: 0 # optional: will be set to 0 or version -1 by default. subsequent revisions use a ".<revision>" prefix
+settings: # REQUIRED
+  blast_chunk: 100000
+  blast_max_chunks: 10
+  blast_min_length: 1000
+  blast_overlap: 0
+  stats_chunk: 1000
+  stats_windows:
+    - 0.1
+    - 0.01
+    - 100000
+    - 1000000
+  taxdump: /volumes/databasenfs/taxdump_2021_06
+  tmp: /tmp
+similarity:
+  blastn:
+    name: nt
+    path: /volumes/databasenfs/nt_2021_06
+  defaults:
+    evalue: 1.0e-25
+    max_target_seqs: 10
+    taxrule: buscogenes
+  diamond_blastp:
+    import_max_target_seqs: 100000
+    name: reference_proteomes
+    path: /volumes/databasenfs/uniprot_2021_06
+    taxrule: blastp=buscogenes
+  diamond_blastx:
+    name: reference_proteomes
+    path: /volumes/databasenfs/uniprot_2021_06
+taxon: # REQUIRED: at least name and taxid must be provided
+  class: Phytomyxea
+  family: Plasmodiophoridae
+  genus: Plasmodiophora
+  name: Plasmodiophora brassicae
+  order: Plasmodiophorida
+  phylum: Endomyxa
+  superkingdom: Eukaryota
+  taxid: "37360" # REQUIRED?
+version: 1 # optional: version will be set to 1 by default. subsequent versions use a ".<revision>" prefix
